@@ -1,0 +1,8 @@
+a2n 1.8.2
+
+config :
+
+upload_max_size = 50mb
+post_max_size = 50mb
+memory_limit = 256mb
+max_execution_time=100

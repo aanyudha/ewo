@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report5" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2c63337-2668-4572-8cad-fee38478f2c4">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="382"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="inp_tgl_awal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_tgl_akhir" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_category" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select p.title,p.summary,c.name, concat(u.first_name," ",u.last_name)as createdby, concat(s.first_name," ",s.last_name) as assignto , l.name as location, sl.name as sublocation, date_format(p.edited_at,'%Y-%m-%d') as edited_at, date_format(p.created_at,'%Y-%m-%d') as created_at
+from posts p
+JOIN users u ON p.user_id = u.id
+JOIN users s ON p.assign_to = s.id
+JOIN locations l ON p.location_id = l.id
+JOIN locations sl ON p.sublocation_id = sl.id
+Join categories c on p.category_id = c.id
+where date_format(p.edited_at,'%Y-%m-%d') between $P{inp_tgl_awal} and $P{inp_tgl_akhir} and category_id like $P{inp_category} and p.visibility = '1' and p.is_scheduled = '0' order by p.edited_at]]>
+	</queryString>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="summary" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="createdby" class="java.lang.String"/>
+	<field name="assignto" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
+	<field name="sublocation" class="java.lang.String"/>
+	<field name="edited_at" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="797" height="13" uuid="e5ecd3f1-00a6-46f7-8d54-a244df03e86e"/>
+				<textElement textAlignment="Center">
+					<font size="10" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Wo Report by Replied Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="549" y="11" width="61" height="13" uuid="6e13b5ce-1128-485f-80c9-1a5a38f70151"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Location]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="11" width="63" height="13" uuid="0d86246d-caf1-4e9a-a800-15d9a5d535a3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Assign To]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="672" y="11" width="53" height="13" uuid="cde4b210-1926-456c-93cf-7aa8b18551aa"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Replied at]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="11" width="65" height="13" uuid="bc0a0dff-a396-4f6f-af85-b883404f4a7e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Created by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="11" width="169" height="13" uuid="8b6df479-2051-49cc-b774-a97c29691b56"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Judul]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="11" width="62" height="13" uuid="69231413-8a9b-44de-b422-6c5702a0a3f6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub Location]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="725" y="11" width="72" height="13" uuid="ba728da0-635a-4fb9-a430-53a2d421c0f1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Created at]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="11" width="201" height="13" uuid="3448c3a8-24c5-4537-8105-e7d0d8dd2873"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summary]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="11" width="50" height="13" uuid="03d53219-8d1a-49d4-994b-0948ff31fa41"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="169" height="13" uuid="76fe4bfc-598c-426f-9807-f47c7a7dc2d4"/>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="0" width="65" height="13" uuid="00133619-a775-4e52-a982-1cbafee80d82"/>
+				<textFieldExpression><![CDATA[$F{createdby}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="0" width="63" height="13" uuid="93b2f056-8e0e-460b-8fe3-4757d8221f1c"/>
+				<textFieldExpression><![CDATA[$F{assignto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="549" y="0" width="61" height="13" uuid="e6f757ea-c286-4baa-9534-357c90544fe4"/>
+				<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="610" y="0" width="62" height="13" uuid="27f27b16-c5b9-4c43-b308-2eccca60fa01"/>
+				<textFieldExpression><![CDATA[$F{sublocation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="672" y="0" width="53" height="13" uuid="f4333f58-de25-46ea-a93b-2e6bb60ef708"/>
+				<textFieldExpression><![CDATA[$F{edited_at}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="725" y="0" width="72" height="13" uuid="831423cc-fc38-4e4a-b232-9d11af76602a"/>
+				<textFieldExpression><![CDATA[$F{created_at}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="201" height="13" uuid="0f51cfff-ba1c-4bb3-86fb-cdc0541557db"/>
+				<textFieldExpression><![CDATA[$F{summary}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="0" width="50" height="13" uuid="a11947e4-a741-44e1-88e9-de87efe46c5c"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="10" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
