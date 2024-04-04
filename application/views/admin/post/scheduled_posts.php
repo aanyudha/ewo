@@ -41,6 +41,7 @@
                             <th><?php echo trans('category'); ?></th>-->
                             <th><?php echo trans('author'); ?></th>
                             <!--<th></th>-->
+                            <th><?php echo trans('intervale-'); ?></th>
                             <th><?php echo trans('days_remaining'); ?></th>
                             <th><?php echo trans('date_added'); ?></th>
                             <th style="min-width: 180px;"><?php echo trans('options'); ?></th>
@@ -88,7 +89,9 @@
                                         </a>
                                     <?php endif; ?>
                                 </td>
-                              
+								<td>
+                                    <strong><?php echo ($item->intervale); ?></strong>
+                                </td>
                                 <td>
                                     <strong><?php echo date_difference(date('Y-m-d'), $item->created_at); ?></strong>
                                 </td>

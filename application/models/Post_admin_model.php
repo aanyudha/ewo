@@ -38,6 +38,7 @@
             'image_small' => $post->image_small,
             'image_mime' => $post->image_mime,
             'is_scheduled' => 0,
+            'intervale' => 0,
             'visibility' => $post->visibility,
             'post_type' => $post->post_type,
             'video_path' => $post->video_path,
@@ -60,7 +61,7 @@
 		//add post
 		public function add_post($post_type)
 		{
-			$data = $this->set_data($post_type);
+			$data = $this->set_data2($post_type);
 			$is_scheduled = $this->input->post('scheduled_post', true);
 			$date_published = $this->input->post('date_published', true);
 			$corp_id = $this->input->post('corp_id', true);
@@ -69,6 +70,7 @@
 			$data['is_scheduled'] = 0;
 			if ($is_scheduled) {
 				$data["is_scheduled"] = 1;
+				$data['intervale'] = $this->input->post('intervale', true);
 			}
 			
 			if (!empty($date_published)) {
@@ -122,7 +124,7 @@
 		//add post logs
 		public function add_post_logs($post_type,$post_id)
 		{
-			$data = $this->set_data($post_type);
+			$data = $this->set_data2($post_type);
 			$is_scheduled = $this->input->post('scheduled_post', true);
 			$date_published = $this->input->post('date_published', true);
 			$corp_id = $this->input->post('corp_id', true);
@@ -131,6 +133,7 @@
 			$data['is_scheduled'] = 0;
 			if ($is_scheduled) {
 				$data["is_scheduled"] = 1;
+				$data['intervale'] = $this->input->post('intervale', true);
 			}
 			
 			if (!empty($date_published)) {
@@ -280,7 +283,12 @@
 			}
 			return $this->db->insert('posts_logs', $data);
 		}
-		
+		//set post data
+		public function set_data2($post_type)
+		{
+			$data = $this->input_values();
+			return $data;
+		}
 		//set post data
 		public function set_data($post_type)
 		{
@@ -2077,6 +2085,7 @@
 		public function check_scheduled_posts()
 		{
 			//SELECT * FROM `posts` WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND DAY(created_at) = DAY(CURRENT_DATE())
+			//SELECT * FROM `posts` WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND DAY(created_at) = DAY(CURRENT_DATE()) AND is_scheduled=1;
 			//$this->db->where('posts.created_at <= CURRENT_TIMESTAMP()');
 			$this->db->where('MONTH(created_at) = MONTH(CURRENT_DATE())');
 			$this->db->where('DAY(created_at) = DAY(CURRENT_DATE())');
@@ -2095,7 +2104,8 @@
 				//untuk logs
 				$this->scheduled_posts_insert_posts_logs($post,$last_id);
 				//untuk publish scheduled wo lagi
-				$this->update_sch_wo($post);
+				//$varCek=$this->check_scheduled_posts_return_id_awal();
+				//$this->update_sch_wo($post,$varCek);
 				echo "UWES.";
 				}else {
 				echo "DURUNG.";
@@ -2106,19 +2116,19 @@
 		public function scheduled_posts_insert_posts_logs($post,$last_id)
 		{
 			$sql = "INSERT INTO posts_logs (post_id,lang_id,title,summary,category_id,location_id,sublocation_id,image_big,image_default,image_slider,image_mid,image_small,image_mime,
-			is_scheduled,visibility,post_type,video_path,image_url,video_embed_code,dept_id,corp_id,user_id,role_id,assign_to,status,image_description,edited_by,edited_at,created_at)  
-			VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			is_scheduled,intervale,visibility,post_type,video_path,image_url,video_embed_code,dept_id,corp_id,user_id,role_id,assign_to,status,image_description,edited_by,edited_at,created_at)  
+			VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			return $this->db->query($sql, array($last_id,$post->lang_id,$post->title,$post->summary,$post->category_id,
 			$post->location_id, $post->sublocation_id, $post->image_big, $post->image_default, $post->image_slider, $post->image_mid, $post->image_small, $post->image_mime,
-			'0',$post->visibility, $post->post_type, $post->video_path, $post->image_url, $post->video_embed_code,$post->dept_id, $post->corp_id, $post->user_id,
+			0,0,$post->visibility, $post->post_type, $post->video_path, $post->image_url, $post->video_embed_code,$post->dept_id, $post->corp_id, $post->user_id,
 			$post->role_id, $post->assign_to, $post->status, $post->image_description, $post->edited_by, $post->edited_at, $post->created_at));
 		}
 		
 		//untuk menjaga agar scheduled wo tetep ada
-		public function update_sch_wo($post){
+		public function update_sch_wo($intervale,$last_id_hasil_awal){
 			//$sql = "UPDATE posts SET created_at = CURRENT_TIMESTAMP() , posts.is_scheduled = 0 WHERE id = ?";
-			$sql = "UPDATE posts SET created_at = DATE_ADD(created_at, INTERVAL 1 YEAR) WHERE id = ?";
-			return $this->db->query($sql, array($post->id));
+			$sql = "UPDATE posts SET created_at = DATE_ADD(created_at, INTERVAL ? DAY) WHERE id = ?";
+			return $this->db->query($sql, array($intervale,$last_id_hasil_awal));
 			reset_cache_data_on_change();
 		}
 		

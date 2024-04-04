@@ -780,4 +780,5 @@ $lang["progress"] = "Progress";
 $lang["-it"] = "IT";
 $lang["-eng"] = "Engineering";
 $lang["-hk"] = "Housekeeping";
+$lang["intervale-"] = "Interval(day)";
 ?>

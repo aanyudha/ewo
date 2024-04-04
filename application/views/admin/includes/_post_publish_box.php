@@ -32,6 +32,14 @@
                     </div>
                 </div>
             </div>
+			<div class="row">
+                <div class="col-md-5 col-sm-12 col-xs-12 col-lang">
+                    <label><?php echo trans('intervale-'); ?></label>
+                </div>
+                <div class="col-md-7 col-sm-12 col-xs-12 col-lang">
+                    <input type="text" name="intervale" id="intervaleid" class="form-control" placeholder="<?php echo trans("intervale-"); ?>">
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <?php if ($post_type == "gallery" || $post_type == "ordered_list"): ?>
