@@ -157,7 +157,7 @@ function get_menu_links_by_lang(val) {
 //datetimepicker
 $(function () {
     $('#datetimepicker').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss'
+        format: 'YYYY-MM-DD HH:mm'
     });
 });
 

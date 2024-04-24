@@ -18,7 +18,7 @@ class Cron_controller extends Home_Core_Controller
 				foreach ($ini as $post) {
 					$this->post_admin_model->scheduled_posts_insert_posts($post);
 					//untuk publish scheduled wo lagi
-					$this->post_admin_model->update_sch_wo($post->intervale,$post->id);
+					$this->post_admin_model->update_sch_wo($post->published_at,$post->intervale,$post->id);
 				}
 		}
     }

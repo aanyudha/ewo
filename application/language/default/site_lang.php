@@ -781,4 +781,5 @@ $lang["-it"] = "IT";
 $lang["-eng"] = "Engineering";
 $lang["-hk"] = "Housekeeping";
 $lang["intervale-"] = "Interval(day)";
+$lang["published_date"] = "Publish Date";
 ?>

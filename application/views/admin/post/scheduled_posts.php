@@ -42,6 +42,7 @@
                             <th><?php echo trans('author'); ?></th>
                             <!--<th></th>-->
                             <th><?php echo trans('intervale-'); ?></th>
+                            <th><?php echo trans('published_date'); ?></th>
                             <th><?php echo trans('days_remaining'); ?></th>
                             <th><?php echo trans('date_added'); ?></th>
                             <th style="min-width: 180px;"><?php echo trans('options'); ?></th>
@@ -92,8 +93,11 @@
 								<td>
                                     <strong><?php echo ($item->intervale); ?></strong>
                                 </td>
+								<td>
+                                    <strong><?php echo formatted_date($item->published_at); ?></strong>
+                                </td>
                                 <td>
-                                    <strong><?php echo date_difference(date('Y-m-d'), $item->created_at); ?></strong>
+                                    <strong><?php echo date_difference(date('Y-m-d'), $item->published_at); ?></strong>
                                 </td>
                                 <td><?php echo formatted_date($item->created_at); ?></td>
                                 <td>
