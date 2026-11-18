@@ -14,18 +14,8 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="table-responsive">
-					<!-- untuk yg JRXML -->
-					<!--<div> 	
-						<ul>
-							<!-- <li><a href="<?php echo admin_url(); ?>reportsbycreatedate"> <?php //echo trans("reports"); ?></a></li>-->
-						<!--	<li><a href="#" data-toggle="modal" data-target="#myModalReport1"><?php //echo trans("report_createddate"); ?></a></li>
-							<li><a href="#" data-toggle="modal" data-target="#myModalReport2"><?php //echo trans("report_replieddate"); ?></a></li>
-							
-						</ul>
-					</div>  -->
-					<!-- untuk yg tabel -->
+					<?php $this->load->view('admin/includes/_filter_posts'); ?>
 					<table id="example" class="table table-bordered table-striped" role="grid">
-						<?php $this->load->view('admin/includes/_filter_posts'); ?>
 						<thead>
 							<tr role="row">
 								<th width="20"><?php echo trans('id'); ?></th>
@@ -173,7 +163,7 @@
 					
 					<div class="form-group">
 						<label><?php echo trans('category'); ?></label>
-						<select id="categories" name="category" class="form-control" onchange="get_sub_categories(this.value);">
+						<select id="report-created-category" name="category" class="form-control">
 							<option value=""><?php echo trans("all"); ?></option>
 							<?php if (!empty($this->input->get('lang_id', true))) {
 								$categories = $this->category_model->get_top_categories_by_lang($this->input->get('lang_id', true));
@@ -227,7 +217,7 @@
 						
 						<div class="form-group">
 							<label><?php echo trans('category'); ?></label>
-							<select id="categories" name="category" class="form-control" onchange="get_sub_categories(this.value);">
+							<select id="report-replied-category" name="category" class="form-control">
 								<option value=""><?php echo trans("all"); ?></option>
 								<?php if (!empty($this->input->get('lang_id', true))) {
 									$categories = $this->category_model->get_top_categories_by_lang($this->input->get('lang_id', true));

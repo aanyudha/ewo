@@ -4,12 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Report_controller extends Admin_Core_Controller
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-		$this->load->library('jasper/PHPJasperXML.php');
-    }
-
     /**
      * untuk report
      */
@@ -44,6 +38,7 @@ class Report_controller extends Admin_Core_Controller
      */
     public function reports1_XLS()
     {
+        $this->load->library('jasper/PHPJasperXML.php');
         //check_permission('users');
 		$data['title'] = trans("reports2");
         $tglAwal = $this->input->post('tglAwal', true);
@@ -67,6 +62,7 @@ class Report_controller extends Admin_Core_Controller
      */
     public function reports2_PDF()
     {
+        $this->load->library('jasper/PHPJasperXML.php');
         //check_permission('users');
 		$data['title'] = trans("reports2");
         $tglAwal = $this->input->post('tglAwal', true);
@@ -90,6 +86,7 @@ class Report_controller extends Admin_Core_Controller
      */
     public function reports2_XLS()
     {
+        $this->load->library('jasper/PHPJasperXML.php');
         //check_permission('users');
 		$data['title'] = trans("reports2");
         $tglAwal = $this->input->post('tglAwal', true);

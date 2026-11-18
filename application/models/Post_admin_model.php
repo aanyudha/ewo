@@ -1363,7 +1363,7 @@
             'q' => $this->input->get('q', true),
 			);
 			
-			$data['q'] = trim($data['q']);
+			$data['q'] = is_string($data['q']) ? trim($data['q']) : '';
 			$data['user_id'] = "";
 			
 			/*if (check_user_permission('manage_all_posts')) {

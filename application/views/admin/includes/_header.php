@@ -494,21 +494,29 @@
                         </a>
                     </li> 
                 <?php endif; ?>
-				<!-- REPORTS ON PROGRESS -->
 				<?php if (check_user_permission('add_post')): ?>
-
-					<li class="treeview">
+                    <?php
+                    $report_method = strtolower($this->router->fetch_class()) === 'report_controller'
+                        ? strtolower($this->router->fetch_method()) : '';
+                    $reports_in_active = $report_method === 'reports_in';
+                    $reports_out_active = $report_method === 'reports_out';
+                    ?>
+                    <li class="treeview<?php echo ($reports_in_active || $reports_out_active) ? ' active menu-open' : ''; ?>">
                         <a href="#">
                             <i class="fa fa-check-square-o"></i>
                             <span><?php echo trans("reports"); ?></span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
-							<li><a href="<?php echo admin_url(); ?>reports_in"> <?php echo trans("reports_in"); ?></a></li>
-                            <li><a href="<?php echo admin_url(); ?>reports_out"> <?php echo trans("reports_out"); ?></a></li>
+                            <li<?php echo $reports_in_active ? ' class="active"' : ''; ?>>
+                                <a href="<?php echo admin_url(); ?>reports_in"<?php echo $reports_in_active ? ' aria-current="page"' : ''; ?>><?php echo trans('reports_in'); ?></a>
+                            </li>
+                            <li<?php echo $reports_out_active ? ' class="active"' : ''; ?>>
+                                <a href="<?php echo admin_url(); ?>reports_out"<?php echo $reports_out_active ? ' aria-current="page"' : ''; ?>><?php echo trans('reports_out'); ?></a>
+                            </li>
                         </ul>
                     </li>
-					<?php endif; ?>
+                <?php endif; ?>
             </ul>
         </section>
         <!-- /.sidebar -->

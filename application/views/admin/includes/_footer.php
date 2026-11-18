@@ -79,21 +79,20 @@
 			})
 		}); 
 	</script>
-	<!-- for table report 'copy', 'csv', 'excel', 'pdf', 'print' -->
+    <?php if (isset($checking_only_reports)): ?>
     <script>
-		$(document).ready(function() {
-			$('#example').DataTable( {
-				dom: 'Bfrtip',
-				"paging":   false,
-				"info":     false,
-				"ordering": false,
-				"searching": false,
-				buttons: [
-				'excel'
-				]
-			} );
-		} );
-	</script>
+        $(function() {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                paging: false,
+                info: false,
+                ordering: false,
+                searching: false,
+                buttons: ['excel', {extend: 'pdf', orientation: 'landscape', pageSize: 'A3'}]
+            });
+        });
+    </script>
+    <?php endif; ?>
 	<!-- Ckeditor -->
 	<script>
 		var ckEditor = document.getElementById('ckEditor');
